@@ -46,9 +46,19 @@ function showTemperature(response) {
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
-let apiKey = "cbb7dffbf17166ca321c36350499d9ef";
-let apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=Barrie&appid=${apiKey}&units=metric`;
-console.log(apiKey);
-console.log(apiUrl);
 
-axios.get(apiUrl).then(showTemperature);
+function search(city) {
+  let apiKey = "cbb7dffbf17166ca321c36350499d9ef";
+  let apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showTemperature);
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  search(cityInputElement.value);
+  console.log(cityInputElement.value);
+}
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
