@@ -32,12 +32,19 @@ function showTemperature(response) {
   let descriptionElement = document.querySelector("#description");
   let humidityEllement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
+  let dateElement = document.querySelector("#date");
+  let iconElement = document.querySelector("#icon");
   temperatureElement.innerHTML = Math.round(response.data.main.temp);
   cityElement.innerHTML = response.data.name;
   descriptionElement.innerHTML = response.data.weather[0].description;
   humidityEllement.innerHTML = response.data.main.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed);
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 let apiKey = "cbb7dffbf17166ca321c36350499d9ef";
 let apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=Barrie&appid=${apiKey}&units=metric`;
